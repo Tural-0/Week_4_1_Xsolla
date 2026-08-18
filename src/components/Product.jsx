@@ -3,7 +3,7 @@ import { useState } from "react";
 
 export default function Product({ product, onIncrease, onDecrease, isInCart = true }) {
 
-  const defaultPic = "https://images.unsplash.com/photo-1541480601022-2308c0f02487?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cmFuZG9tJTIwb2JqZWN0c3xlbnwwfHwwfHx8MA%3D%3D"
+  const price = (product.price/100).toFixed(2)
   let soldText = "";
   let buttonText = "Add to cart"
 
@@ -38,7 +38,7 @@ export default function Product({ product, onIncrease, onDecrease, isInCart = tr
         <p className="product-card__name">{product.name}</p>
         <p className="product-card__description">{product.description}</p>
         <div className="product-card__price-add">
-          <p className="product-card__price-add__text">${product.price}</p>
+          <p className="product-card__price-add__text">${price}</p>
           <div className={"product-card__price-add__addToCartButton"+soldText} onClick={addToCart}>
             <p className={"product-card__price-add__addToCartButton__text"+soldText}>{buttonText}</p>
           </div>

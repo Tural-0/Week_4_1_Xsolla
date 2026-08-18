@@ -1,41 +1,9 @@
-.container{
+.product-list{  
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
   background-color: var(--line);
+
   padding: 48px;
-}
-
-.create{
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.create label{
-  text-align: left;
-  display: block;
-}
-
-.create h3{
-  font-size: 20px;
-  color: red;
-  margin-bottom: 30px;
-}
-
-.create input, .create select {
-  width: 100%;
-  padding: 6px 10px;
-  margin: 10px 0;
-  border: 1px solid var(--border);
-  box-sizing: border-box;
-  display: block;
-}
-
-.create button{
-  background: #f1356d;
-  color: var(--text);
-  border: 0;
-  padding: 8px;
-  border-radius: 8px;
-  cursor: pointer;
+  gap: 24px;
 }

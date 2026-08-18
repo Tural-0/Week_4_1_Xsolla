@@ -79,6 +79,10 @@
   border-radius: 8px;
 }
 
+.navbar-item__loginButton:hover{
+  background-color: var(--accent-hover);
+}
+
 .navbar-item__logintext{
   font-weight: 600;
   font-size: 14px;

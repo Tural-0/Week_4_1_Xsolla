@@ -1,26 +1,58 @@
 export const PRODUCTS = [
   {
     id: 1,
-    name: "Starter Sword",
-    description: "Starter Sword for beginners",
-    price: 9.99,
-    stock: 10,
-    quantity: 0
+    name: "Xsolla T-Shirt",
+    description: "Classic cotton tee with Xsolla logo. Unisex fit.",
+    price: 2550,
+    stock: 10
   },
   {
     id: 2,
-    name: "Mythic Bow",
-    description: "One of the best bows you can find around here",
-    price: 24.99,
-    stock: 0,
-    quantity: 0
+    name: "Developer Hoodie",
+    description: "Heavyweight pullover hoodie. Perfect for late-night PRs.",
+    price: 5999,
+    stock: 15
   },
   {
     id: 3,
-    name: "Mage Staff",
-    description: "Pretty basic magic staff for daily use",
-    price: 4.99,
-    stock: 3,
-    quantity: 0
+    name: "Sticker Pack",
+    description: "10-pack of Xsolla and open-source themed stickers.",
+    price: 560,
+    stock: 20
+  },
+  {
+    id: 4,
+    name: "Mechanical Keyboard",
+    description: "Tenkeyless, Cherry MX Brown switches. USB-C.",
+    price: 18030,
+    stock: 3
+  },
+  {
+    id: 5,
+    name: "Laptop Stand",
+    description: "Aluminium adjustable stand. Folds flat for travel.",
+    price: 4520,
+    stock: 0
+  },
+  {
+    id: 6,
+    name: "USB-C Hub",
+    description: "7-in-1 hub: HDMI 4K, 3x USB-A, SD, microSD, PD.",
+    price: 3210,
+    stock: 100
+  },
+  {
+    id: 7,
+    name: "Notebook (A5)",
+    description: "Dot-grid, 200 pages, lay-flat binding.",
+    price: 1270,
+    stock: 6
+  },
+  {
+    id: 8,
+    name: "Cable Organiser",
+    description: "Leather magnetic cable ties, pack of 6.",
+    price: 805,
+    stock: 11
   },
 ];
