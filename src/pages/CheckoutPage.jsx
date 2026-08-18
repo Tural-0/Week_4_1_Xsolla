@@ -1,4 +1,4 @@
-import Product from "../components/Product";
+import LineProduct from "../components/LineProduct";
 import '../styles/checkout.css'
 import { useState, useEffect, useReducer, useContext } from "react";
 import { Link } from "react-router-dom";
@@ -64,11 +64,12 @@ export default function CheckoutPage() {
 
   return (
     <>
+    <Navbar/>
     <div className="container">
       {products.map(product => {
         if (product.quantity > 0){
           return(
-            <Product
+            <LineProduct
             key={product.id}
             product={product}
             onIncrease={() => dispatch({type:"INCREASE", id: product.id})}
@@ -76,8 +77,6 @@ export default function CheckoutPage() {
           )
         }
       })}
-
-      <h2>Total: ${totalPrice.toFixed(2)}</h2>
 
       <div className="create">
         <h3>Checkout</h3>

@@ -1,0 +1,140 @@
+.lineproduct-card{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 16px;
+    background-color: var(--surface);
+}
+
+
+
+
+
+.lineproduct-card__gradient{
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom right, var(--gradient-1) 0%, var(--gradient-1) 33%, var(--gradient-2) 66%, var(--gradient-2) 100%);
+}
+
+.lineproduct-card__gradient__circle__text{
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--surface);
+}
+
+
+
+
+
+.lineproduct-card__information{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+
+
+
+.lineproduct-card__infoTexts{
+    margin-left: 16px;
+    margin-right: auto;
+}
+
+.lineproduct-card__name{
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.lineproduct-card__stockInfo{
+    font-size: 12px;
+    color: var(--ink-muted);
+}
+
+
+
+
+.lineproduct-card__count-card-whole{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    justify-self: flex-end;
+}
+
+
+.lineproduct-card__count-card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.lineproduct-card__count-card__minusButton{
+    width: 30px;
+    height: 30px;
+    background-color: var(--surface);
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    cursor: pointer;
+}
+
+.lineproduct-card__count-card__minusText{
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+
+
+.lineproduct-card__count-card__text{
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+
+
+
+.lineproduct-card__count-card__priceText{
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--ink);
+}
+
+.lineproduct-card__count-card__deleteButton{
+    background-color: var(--surface);
+    border: none;
+    cursor: pointer;
+}
+
+.lineproduct-card__count-card__deleteButton__text{
+    font-size: 18px;
+    color: var(--ink-muted);
+}
+
+
+@media (width <= 390px) {
+    .lineproduct-card {
+        align-items: flex-start;
+    }
+
+    .lineproduct-card__information {
+        flex-wrap: wrap;
+    }
+
+    .lineproduct-card__infoTexts {
+        margin-right: 0;
+    }
+
+    .lineproduct-card__count-card-whole {
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: 12px;
+    }
+}
