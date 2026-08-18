@@ -4,6 +4,7 @@
   align-items: center;
 
   padding: 20px 40px;
+  margin-top: auto;
 
   background-color: var(--surface);
   border-top: 1px solid var(--border);

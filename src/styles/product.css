@@ -90,13 +90,15 @@
   background-color: var(--accent);
   padding: 9px 20px;
   border-radius: 8px;
-  cursor: pointer
+  border: 0px;
+  cursor: pointer;
 }
 
 .product-card__price-add__addToCartButton--sold{
   background-color: var(--line);
   padding: 9px 20px;
   border-radius: 8px;
+  border: 0px;
   cursor: not-allowed
 }
 
