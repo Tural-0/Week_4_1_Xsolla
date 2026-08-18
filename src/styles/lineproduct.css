@@ -64,7 +64,6 @@
     justify-content: center;
     align-items: center;
     gap: 16px;
-    justify-self: flex-end;
 }
 
 
@@ -120,21 +119,24 @@
 
 
 @media (width <= 390px) {
-    .lineproduct-card {
-        align-items: flex-start;
-    }
 
-    .lineproduct-card__information {
+    .lineproduct-card {
         flex-wrap: wrap;
     }
 
     .lineproduct-card__infoTexts {
+        margin-left: 16px;
         margin-right: 0;
+        flex: 1;
     }
 
     .lineproduct-card__count-card-whole {
         width: 100%;
-        justify-content: flex-end;
+        justify-content: flex-start;
         margin-top: 12px;
+    }
+
+    .lineproduct-card__count-card__priceText{
+        margin-left: auto;
     }
 }

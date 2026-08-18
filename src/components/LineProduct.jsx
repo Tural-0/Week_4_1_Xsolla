@@ -24,26 +24,24 @@ export default function LineProduct({ product, onIncrease, onDecrease, isInCart 
         <div className={"lineproduct-card__gradient"+soldText}>
             <p className="lineproduct-card__gradient__circle__text">{product.name[0]}</p>
         </div>
-        <div className="lineproduct-card__information">
-            <div className="lineproduct-card__infoTexts">
-                <p className="lineproduct-card__name">{product.name}</p>
-                <p className="lineproduct-card__stockInfo">{product.stock + " in stock"}</p>
-            </div>
-            <div className="lineproduct-card__count-card-whole">
-                <div className="lineproduct-card__count-card">
-                    <button className="lineproduct-card__count-card__minusButton">
-                        <p className="lineproduct-card__count-card__minusText">-</p>
-                    </button>
-                    <p className="lineproduct-card__count-card__text">{product.count}</p>
-                    <button className="lineproduct-card__count-card__minusButton">
-                        <p className="lineproduct-card__count-card__minusText">+</p>
-                    </button>
-                </div>
-                <p className="lineproduct-card__count-card__priceText">${price}</p>
-                <button className="lineproduct-card__count-card__deleteButton">
-                    <p className="lineproduct-card__count-card__deleteButton__text">x</p>
+        <div className="lineproduct-card__infoTexts">
+            <p className="lineproduct-card__name">{product.name}</p>
+            <p className="lineproduct-card__stockInfo">{product.stock + " in stock"}</p>
+        </div>
+        <div className="lineproduct-card__count-card-whole">
+            <div className="lineproduct-card__count-card">
+                <button className="lineproduct-card__count-card__minusButton">
+                    <p className="lineproduct-card__count-card__minusText">-</p>
+                </button>
+                <p className="lineproduct-card__count-card__text">{product.count}</p>
+                <button className="lineproduct-card__count-card__minusButton">
+                    <p className="lineproduct-card__count-card__minusText">+</p>
                 </button>
             </div>
+            <p className="lineproduct-card__count-card__priceText">${price}</p>
+            <button className="lineproduct-card__count-card__deleteButton">
+                <p className="lineproduct-card__count-card__deleteButton__text">x</p>
+            </button>
         </div>
     </div>
     </>
