@@ -93,3 +93,18 @@
   text-decoration: none;
   color: var(--text);
 }
+
+@media (width <= 768px) {
+  .navbar {
+    padding: 12px 24px;
+  }
+}
+
+@media (width <= 390px) {
+  .navbar-item__storetext{
+    display: none;
+  }
+  .navbar {
+    padding: 12px 16px;
+  }
+}

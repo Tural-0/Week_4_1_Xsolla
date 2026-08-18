@@ -1,9 +1,23 @@
 .product-list{  
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
 
   background-color: var(--line);
 
   padding: 48px;
   gap: 24px;
+}
+
+@media (width <= 768px) {
+  .product-list {
+    padding: 24px;
+    
+  }
+}
+
+@media (width <= 390px) {
+  .product-list {
+    padding: 16px;
+    
+  }
 }
