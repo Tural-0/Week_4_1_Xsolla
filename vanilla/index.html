@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping Cart</title>
+
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <div class="container">
+      <header class="header">
+        <span id="badge">0</span>
+        <p class="cart-summary">Total: <strong>0 items</strong></p>
+      </header>
+
+      <article class="card">
+        <h2 class="title">Starter Pack</h2>
+        <p class="price">$12.00</p>
+
+        <div class="quantity">
+          <button id="minus">-</button>
+          <span id="quantity">1</span>
+          <button id="plus">+</button>
+        </div>
+
+        <button class="add-button">Add to Cart</button>
+      </article>
+
+      <ul id="list"></ul>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>

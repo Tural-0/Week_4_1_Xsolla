@@ -1,0 +1,30 @@
+:root {
+  --background: #ffffff;
+  --text: #222222;
+  --surface: #f5f5f5;
+  --border: #dddddd;
+  --button-background: #222222;
+  --button-text: #ffffff;
+
+  --ink: #141D1F;
+  --ink-muted: #5B5D56;
+  --accent: #80EAFF;
+  --line: #D0D1C9;
+  --surface: #FFF;
+}
+
+body.dark {
+  --background: #181818;
+  --text: #f5f5f5;
+  --surface: #242424;
+  --border: #444444;
+  --button-background: #f5f5f5;
+  --button-text: #181818;
+}
+
+body {
+  margin: 0;
+  background-color: var(--background);
+  color: var(--text);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}

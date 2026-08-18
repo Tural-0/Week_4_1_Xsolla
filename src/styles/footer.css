@@ -1,0 +1,30 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 20px 40px;
+
+  background-color: var(--surface);
+  border-top: 1px solid var(--border);
+
+  color: var(--text);
+}
+
+.theme-button {
+  padding: 8px 14px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: var(--button-background);
+  color: var(--button-text);
+
+  cursor: pointer;
+
+  transition: opacity 0.2s ease;
+}
+
+.theme-button:hover {
+  opacity: 0.8;
+}
