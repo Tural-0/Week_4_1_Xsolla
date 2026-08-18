@@ -57,6 +57,7 @@ export default function LoginPage() {
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}/>
+                <p className={"inputs__email__errText"+validEmailText}>Email is incorrect.</p>
             </div>
             <div className="inputs__password">
                 <p className="inputs__password__text">Password</p>
@@ -67,6 +68,7 @@ export default function LoginPage() {
                     required
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}/>
+                <p className={"inputs__password__errText"+validPasswordText}>Password is incorrect.</p>
             </div>
             <button className="inputs__button" type="submit">
                 <p className="inputs__button__text">Sign in</p>

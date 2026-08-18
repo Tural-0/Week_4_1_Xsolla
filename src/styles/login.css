@@ -72,6 +72,17 @@
     margin-bottom: 6px;
 }
 
+.inputs__email__errText{
+    display: none;
+}
+
+.inputs__email__errText--danger{
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--danger);
+}
+
 
 
 .inputs__password{
@@ -83,6 +94,17 @@
     font-weight: 600;
     color: var(--ink-muted);
     margin-bottom: 6px;
+}
+
+.inputs__password__errText{
+    display: none;
+}
+
+.inputs__password__errText--danger{
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--danger);
 }
 
 
@@ -171,4 +193,8 @@
     background-color: var(--surface);
     outline: 2px solid var(--danger);
     border: 0px solid var(--line);
+}
+
+.inputs__input:focus-visible{
+    outline: 2px solid var(--accent-strong);
 }
