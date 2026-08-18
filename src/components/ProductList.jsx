@@ -16,7 +16,7 @@ export default function ProductList() {
   return (
     <div className="container">
       <div className="products">
-        <h2>Total: ${totalPrice.toFixed(2)}</h2>
+        {/*<h2>Total: ${totalPrice.toFixed(2)}</h2>*/}
         {products.length > 0 &&
           products.map((product) => (
             <Product

@@ -6,9 +6,18 @@
   --button-background: #222222;
   --button-text: #ffffff;
 
+
+
   --ink: #141D1F;
   --ink-muted: #5B5D56;
+
   --accent: #80EAFF;
+  --accent-strong: #00A2C2;
+  --accent-hover: #B2F2FF;
+
+  --gradient-1: #141D1F;
+  --gradient-2: #80EAFF;
+
   --line: #D0D1C9;
   --surface: #FFF;
 }
