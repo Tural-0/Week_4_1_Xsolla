@@ -11,11 +11,16 @@ import Footer from "./components/Footer";
 import { CartProvider } from "./context/CartContext";
 import { useTheme } from "./custom_hooks/useTheme";
 
+import "./App.css"
+
 function App() {
   const { theme, toggleTheme } = useTheme();
 
   return (
     <>
+    <div className="body">
+    <div className="main">
+
     <CartProvider>
 
     <BrowserRouter>
@@ -35,10 +40,12 @@ function App() {
       </Routes>
     </BrowserRouter>
     </CartProvider>
-    <Footer
+    </div>
+    <Footer className="footer"
         theme={theme}
         onToggleTheme={toggleTheme}
         />
+    </div>
     </>
   );
 }

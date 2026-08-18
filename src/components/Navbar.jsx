@@ -11,38 +11,7 @@ export default function Navbar(){
 
     const [cartCount, setCartCount] = useState(0)
 
-    const [order, setOrder] = useLocalStorage("order",null)
-
     const {products, dispatch} = useContext(CartCtx)
-
-    function useLocalStorage(key, init) {
-        const [value, setValue] =
-            useState(() => {
-                const stored =
-                localStorage.getItem(key);
-            return stored
-                ? JSON.parse(stored)
-                : init;
-            });
-
-        useEffect(() => {
-            localStorage.setItem(
-            key, JSON.stringify(value)
-            );
-        }, [key, value]);
-
-        return [value, setValue];
-    }
-  
-    useEffect(() => {
-        products.map(product =>{
-            if (order.items[product.id-1] != null){
-                if (product.id === order.items[product.id-1].itemId){
-                    product.quantity = order.items[product.id-1].quantity
-                }
-            }
-        })
-    }, [order]);
     
     useEffect(() => {
         setCartCount(prev => products.filter(
