@@ -95,6 +95,8 @@
     font-size: 14px;
     font-weight: 600;
     color: var(--ink);
+    min-width: 20px;
+    text-align: center;
 }
 
 
@@ -102,6 +104,8 @@
 
 .lineproduct-card__count-card__priceText{
     font-size: 15px;
+    min-width: 78px;
+    text-align: right;
     font-weight: bold;
     color: var(--ink);
 }

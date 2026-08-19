@@ -1,6 +1,7 @@
 .product-list{  
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  justify-content: center;
+  grid-template-columns: repeat(3, minmax(270px, 368px));
 
   background-color: var(--line);
 
@@ -11,13 +12,13 @@
 @media (width <= 768px) {
   .product-list {
     padding: 24px;
-    
+    grid-template-columns: repeat(2, minmax(270px, 368px));
   }
 }
 
 @media (width <= 390px) {
   .product-list {
     padding: 16px;
-    
+    grid-template-columns: repeat(1, minmax(270px, 368px));
   }
 }

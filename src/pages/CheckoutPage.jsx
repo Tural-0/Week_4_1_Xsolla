@@ -4,38 +4,22 @@ import { useState, useEffect, useReducer, useContext } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { CartCtx } from "../context/CartContext";
+import { useLocalStorage } from "../custom_hooks/useLocalStorage";
+import { CART } from "../data/cart"
 
 export default function CheckoutPage() {
   const [name, setName] = useLocalStorage("userName","")
   const [email, setEmail] = useLocalStorage("email","")
   const [address, setAddress] = useLocalStorage("address","")
   const [order, setOrder] = useLocalStorage("order",null)
-
-  const {products, dispatch} = useContext(CartCtx)
-
-  function useLocalStorage(key, init) {
-  const [value, setValue] =
-    useState(() => {
-      const stored =
-        localStorage.getItem(key);
-      return stored
-        ? JSON.parse(stored)
-        : init;
-    });
-
-    useEffect(() => {
-      localStorage.setItem(
-        key, JSON.stringify(value)
-      );
-    }, [key, value]);
-
-   return [value, setValue];
-  }
   
-  const totalPrice = products.reduce(
+  const [cart, setPrdcs] = useState(CART)
+
+  const totalPrice = cart.reduce(
     (total, product) => Math.round((total + product.price * product.quantity) * 100)/100,
     0
   );
+
 
   const handleSubmit = (event) => {
     event.preventDefault(); // Prevents page reload
@@ -65,9 +49,8 @@ export default function CheckoutPage() {
   return (
     <>
     <Navbar/>
-    <div className="container">
-      {products.map(product => {
-        if (product.quantity > 0){
+    <div className="checkout-page">
+      { cart.map(product => {
           return(
             <LineProduct
             key={product.id}
@@ -75,7 +58,6 @@ export default function CheckoutPage() {
             onIncrease={() => dispatch({type:"INCREASE", id: product.id})}
             onDecrease={() => dispatch({type:"DECREASE", id: product.id})}/>
           )
-        }
       })}
 
       <div className="create">
