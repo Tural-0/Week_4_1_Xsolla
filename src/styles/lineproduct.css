@@ -84,6 +84,7 @@
 .lineproduct-card__stockInfo{
     font-size: 12px;
     color: var(--ink-muted);
+    margin-top: 4px;
 }
 
 
@@ -144,6 +145,7 @@
     background-color: var(--surface);
     border: none;
     cursor: pointer;
+    width: 24px;
 }
 
 .lineproduct-card__count-card__deleteButton__text{

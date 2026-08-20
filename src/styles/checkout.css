@@ -1,0 +1,156 @@
+.checkout-page{
+    padding-top: 40px;
+    padding-left: 64px;
+    padding-right: 64px;
+    padding-bottom: 64px;
+
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 24px;
+}
+
+
+
+
+.checkout-page__orderSum{
+    max-width: 360px;
+    max-height: 330px;
+    padding: 20px;
+    border-radius: 14px;
+    background-color: var(--surface);
+
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+
+
+.checkout-page__orderSum__mainText{
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--ink);
+}
+
+
+
+.checkout-page__orderSum__subtotal{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.checkout-page__orderSum__subtotal__text{
+    margin-right: auto;
+    font-size: 13px;
+    color: var(--ink-muted);
+}
+
+.checkout-page__orderSum__subtotal__price{
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+
+
+.checkout-page__orderSum__delivery{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.checkout-page__orderSum__delivery__text{
+    margin-right: auto;
+    font-size: 13px;
+    color: var(--ink-muted);
+}
+
+.checkout-page__orderSum__delivery__price{
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+
+
+.checkout-page__orderSum__promo{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.checkout-page__orderSum__promo__text{
+    margin-bottom: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-muted);
+}
+
+.checkout-page__orderSum__promo_input{
+    padding: 13px 14px;
+    border-radius: 8px;
+    background-color: var(--surface);
+    border: 1px solid var(--line);
+    width: 100%;
+}
+
+.checkout-page__orderSum__promo_input::placeholder{
+    font-size: 14px;
+    color: var(--ink-muted);
+}
+
+
+
+.checkout-page__orderSum__line{
+    color: var(--line);
+    height: 1px;
+}
+
+
+
+.checkout-page__orderSum__total{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.checkout-page__orderSum__total__text{
+    margin-right: auto;
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--ink);
+}
+
+.checkout-page__orderSum__total__price{
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--accent-strong);
+}
+
+
+
+.checkout-page__orderSum__orderButton{
+    padding: 14px 0px;
+    border-radius: 8px;
+    background-color: var(--accent);
+    border: 0px;
+}
+
+.checkout-page__orderSum__orderButton__text{
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.checkout-page__orderSum__orderButton:hover{
+    background-color: var(--accent-hover);
+}
+
+
+
+.checkout-page__orderSum__terms{
+    font-size: 11px;
+    color: var(--ink-muted);
+}

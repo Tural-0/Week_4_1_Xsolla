@@ -32,7 +32,7 @@ export default function LineProduct({ product, onIncrease, onDecrease, isInCart 
         <div className="lineproduct-card__count-card-whole">
             <div className="lineproduct-card__count-card">
                 <button className="lineproduct-card__count-card__minusButton">
-                    <p className="lineproduct-card__count-card__minusText">-</p>
+                    <p className="lineproduct-card__count-card__minusText">−</p>
                 </button>
                 <p className="lineproduct-card__count-card__text">{product.count}</p>
                 <button className="lineproduct-card__count-card__minusButton">

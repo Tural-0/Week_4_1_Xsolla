@@ -15,16 +15,16 @@ export default function CheckoutPage() {
   
   const [cart, setPrdcs] = useState(CART)
 
-  const totalPrice = cart.reduce(
-    (total, product) => Math.round((total + product.price * product.quantity) * 100)/100,
+  const totalPrice = (cart.reduce(
+    (total, product) => ((total + product.price * product.count)),
     0
-  );
+  ))/100;
 
 
   const handleSubmit = (event) => {
     event.preventDefault(); // Prevents page reload
 
-    const items = products
+    const items = cart
       .filter(product => product.quantity > 0)
       .map(product => ({
         itemId: product.id,
@@ -50,47 +50,45 @@ export default function CheckoutPage() {
     <>
     <Navbar/>
     <div className="checkout-page">
-      <LineProductList/>
-
-      <div className="create">
-        <h3>Checkout</h3>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>Name:</label>
-            <input
-              type="text"
-              placeholder="Your name"
-              required
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              />
+      {cart.length > 0 ?
+        <>
+          <LineProductList/>
+          <div className='checkout-page__orderSum'>
+            <p className='checkout-page__orderSum__mainText'>Order summary</p>
+            <div className='checkout-page__orderSum__subtotal'>
+              <p className='checkout-page__orderSum__subtotal__text'>Subtotal</p>
+              <p className='checkout-page__orderSum__subtotal__price'>${totalPrice}</p>
+            </div>
+            <div className='checkout-page__orderSum__delivery'>
+              <p className='checkout-page__orderSum__delivery__text'>Delivery</p>
+              <p className='checkout-page__orderSum__delivery__price'>Free</p>
+            </div>
+            <div className='checkout-page__orderSum__promo'>
+              <p className='checkout-page__orderSum__promo__text'>Promo code</p>
+              <input
+                className='checkout-page__orderSum__promo_input'
+                placeholder='XSOLLA10'
+                type='text'/>
+            </div>
+            <hr className='checkout-page__orderSum__line'/>
+            <div className='checkout-page__orderSum__total'>
+              <p className='checkout-page__orderSum__total__text'>Total</p>
+              <p className='checkout-page__orderSum__total__price'>${totalPrice+0}</p>
+            </div>
+            <button
+              className='checkout-page__orderSum__orderButton'
+              onClick={handleSubmit}
+              >
+                <p className='checkout-page__orderSum__orderButton__text'>Place order</p>
+              </button>
+            <p className='checkout-page__orderSum__terms'>By placing this order you agree to the Terms of Service.</p>
           </div>
+        </>
+        :
+        <div className='checkout-page__emptyCart'>
 
-          <div>
-            <label>Email:</label>
-            <input
-              type="email"
-              placeholder="example@gmail.com"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              />
-          </div>
-
-          <div>
-            <label>Address:</label>
-            <input
-              type="text"
-              placeholder="Your home address"
-              required
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              />
-          </div>
-
-          <button type="submit">Submit</button>
-        </form>
-      </div>
+        </div>
+      }
     </div>
     </>
   );
