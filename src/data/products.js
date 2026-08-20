@@ -5,7 +5,7 @@ export const PRODUCTS = [
     description: "Classic cotton tee with Xsolla logo. Unisex fit.",
     price: 2550,
     stock: 10,
-    count: 0
+    count: 2
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ export const PRODUCTS = [
     description: "10-pack of Xsolla and open-source themed stickers.",
     price: 560,
     stock: 20,
-    count: 0
+    count: 1
   },
   {
     id: 4,
