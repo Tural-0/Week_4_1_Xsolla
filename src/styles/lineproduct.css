@@ -14,26 +14,22 @@
 @container lineproduct (max-width: 390px) {
     .lineproduct-card {
         flex-wrap: wrap;
-        outline: 1px solid blue;
     }
 
     .lineproduct-card__infoTexts {
         margin-left: 16px;
         margin-right: 0;
         flex: 1;
-        outline: 1px solid blue;
     }
 
     .lineproduct-card__count-card-whole {
         width: 100%;
         justify-content: flex-start;
         margin-top: 12px;
-        outline: 1px solid blue;
     }
 
     .lineproduct-card__count-card__priceText{
         margin-left: auto;
-        outline: 1px solid blue;
     }
 }
 

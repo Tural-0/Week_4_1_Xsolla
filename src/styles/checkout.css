@@ -9,6 +9,15 @@
     gap: 24px;
 }
 
+.checkout-page--empty{
+    padding-top: 40px;
+    padding-left: 64px;
+    padding-right: 64px;
+    padding-bottom: 64px;
+
+    display: grid;
+    grid-template-columns: 1fr;
+}
 
 
 
@@ -153,4 +162,75 @@
 .checkout-page__orderSum__terms{
     font-size: 11px;
     color: var(--ink-muted);
+}
+
+
+
+
+.checkout-page__emptyCart{
+    width: 100%;
+    border-radius: 14px;
+    background-color: var(--surface);
+    padding: 72px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    align-items: center;
+}
+
+
+
+.checkout-page__emptyCart__textDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.checkout-page__emptyCart__mainText{
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--ink);
+}
+
+.checkout-page__emptyCart__subText{
+    font-size: 13px;
+    color: var(--ink-muted);
+}
+
+
+
+.checkout-page__emptyCart__button{
+    padding: 12px 22px;
+    border-radius: 8px;
+    background-color: var(--accent);
+    border: 0px;
+}
+
+.checkout-page__emptyCart__button:hover{
+    background-color: var(--accent-hover);
+}
+
+.checkout-page__emptyCart__button__text{
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+
+@media screen and (max-width: 769px){
+    .checkout-page{
+        padding-top: 24px;
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-bottom: 40px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+    .checkout-page__orderSum{
+        max-width: 100%;
+    }
 }

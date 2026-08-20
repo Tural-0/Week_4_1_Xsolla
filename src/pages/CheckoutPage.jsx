@@ -1,5 +1,6 @@
 import '../styles/checkout.css'
 import { useState, useEffect, useReducer, useContext } from "react";
+import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import LineProductList from "../components/LineProductList";
@@ -12,6 +13,8 @@ export default function CheckoutPage() {
   const [email, setEmail] = useLocalStorage("email","")
   const [address, setAddress] = useLocalStorage("address","")
   const [order, setOrder] = useLocalStorage("order",null)
+
+  const navigate = useNavigate()
   
   const [cart, setPrdcs] = useState(CART)
 
@@ -49,7 +52,7 @@ export default function CheckoutPage() {
   return (
     <>
     <Navbar/>
-    <div className="checkout-page">
+    <div className={cart.length > 0 ? "checkout-page" : "checkout-page--empty"}>
       {cart.length > 0 ?
         <>
           <LineProductList/>
@@ -86,7 +89,13 @@ export default function CheckoutPage() {
         </>
         :
         <div className='checkout-page__emptyCart'>
-
+          <div className='checkout-page__emptyCart__textDiv'>
+            <p className='checkout-page__emptyCart__mainText'>Your cart is empty</p>
+            <p className='checkout-page__emptyCart__subText'>Nothing here yet. The catalogue is one click away.</p>
+          </div>
+          <button className='checkout-page__emptyCart__button'>
+            <p className='checkout-page__emptyCart__button__text' onClick={() => {navigate("/")}}>Browse the store</p>
+          </button>
         </div>
       }
     </div>
