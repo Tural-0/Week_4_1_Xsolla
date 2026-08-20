@@ -1,8 +1,8 @@
-import LineProduct from "../components/LineProduct";
 import '../styles/checkout.css'
 import { useState, useEffect, useReducer, useContext } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import LineProductList from "../components/LineProductList";
 import { CartCtx } from "../context/CartContext";
 import { useLocalStorage } from "../custom_hooks/useLocalStorage";
 import { CART } from "../data/cart"
@@ -50,15 +50,7 @@ export default function CheckoutPage() {
     <>
     <Navbar/>
     <div className="checkout-page">
-      { cart.map(product => {
-          return(
-            <LineProduct
-            key={product.id}
-            product={product}
-            onIncrease={() => dispatch({type:"INCREASE", id: product.id})}
-            onDecrease={() => dispatch({type:"DECREASE", id: product.id})}/>
-          )
-      })}
+      <LineProductList/>
 
       <div className="create">
         <h3>Checkout</h3>

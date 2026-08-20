@@ -20,6 +20,7 @@ export default function LineProduct({ product, onIncrease, onDecrease, isInCart 
 
   return (
     <>
+    <div className="lineproduct-cardParent">
     <div className="lineproduct-card">
         <div className={"lineproduct-card__gradient"+soldText}>
             <p className="lineproduct-card__gradient__circle__text">{product.name[0]}</p>
@@ -43,6 +44,7 @@ export default function LineProduct({ product, onIncrease, onDecrease, isInCart 
                 <p className="lineproduct-card__count-card__deleteButton__text">x</p>
             </button>
         </div>
+    </div>
     </div>
     </>
   );

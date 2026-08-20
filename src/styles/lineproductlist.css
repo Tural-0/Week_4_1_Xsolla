@@ -1,0 +1,25 @@
+.line-product-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+
+
+.line-product-list__countText{
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--ink);
+    margin-bottom: 16px;
+}
+
+
+
+.line-product-list__list{
+    border-radius: 14px;
+    background-color: var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    overflow: hidden;
+}
