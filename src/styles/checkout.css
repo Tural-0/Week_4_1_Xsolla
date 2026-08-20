@@ -192,11 +192,13 @@
     font-size: 18px;
     font-weight: bold;
     color: var(--ink);
+    text-align: center;
 }
 
 .checkout-page__emptyCart__subText{
     font-size: 13px;
     color: var(--ink-muted);
+    text-align: center;
 }
 
 

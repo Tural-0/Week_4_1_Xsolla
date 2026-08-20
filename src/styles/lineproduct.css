@@ -11,29 +11,6 @@
     container-name: lineproduct;
 }
 
-@container lineproduct (max-width: 390px) {
-    .lineproduct-card {
-        flex-wrap: wrap;
-    }
-
-    .lineproduct-card__infoTexts {
-        margin-left: 16px;
-        margin-right: 0;
-        flex: 1;
-    }
-
-    .lineproduct-card__count-card-whole {
-        width: 100%;
-        justify-content: flex-start;
-        margin-top: 12px;
-    }
-
-    .lineproduct-card__count-card__priceText{
-        margin-left: auto;
-    }
-}
-
-
 
 
 .lineproduct-card__gradient{
@@ -147,4 +124,40 @@
 .lineproduct-card__count-card__deleteButton__text{
     font-size: 18px;
     color: var(--ink-muted);
+}
+
+
+@container lineproduct (max-width: 390px) {
+    .lineproduct-card {
+        flex-wrap: wrap;
+    }
+
+    .lineproduct-card__gradient__circle__text{
+        font-size: 20px;
+    }
+
+    .lineproduct-card__infoTexts {
+        margin-left: 12px;
+        margin-right: 0;
+        flex: 1;
+    }
+
+    .lineproduct-card__count-card-whole {
+        width: 100%;
+        justify-content: flex-start;
+        margin-top: 14px;
+        gap: 14px;
+    }
+
+    .lineproduct-card__count-card__priceText{
+        margin-left: auto;
+    }
+    .lineproduct-card__gradient{
+        max-width: 56px;
+        max-height: 56px;
+    }
+    .lineproduct-card__count-card__minusButton{
+        width: 32px;
+        height: 32px;
+    }
 }

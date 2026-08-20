@@ -41,7 +41,7 @@ export default function LineProduct({ product, onIncrease, onDecrease, isInCart 
             </div>
             <p className="lineproduct-card__count-card__priceText">${price}</p>
             <button className="lineproduct-card__count-card__deleteButton">
-                <p className="lineproduct-card__count-card__deleteButton__text">x</p>
+                <p className="lineproduct-card__count-card__deleteButton__text">×</p>
             </button>
         </div>
     </div>

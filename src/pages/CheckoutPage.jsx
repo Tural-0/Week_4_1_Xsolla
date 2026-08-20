@@ -16,7 +16,7 @@ export default function CheckoutPage() {
 
   const navigate = useNavigate()
   
-  const [cart, setPrdcs] = useState(CART)
+  const [cart, setPrdcs] = useState([])
 
   const totalPrice = (cart.reduce(
     (total, product) => ((total + product.price * product.count)),
