@@ -16,7 +16,6 @@
 .product-card__gradient{
   border-radius: 14px 14px 0 0;
   display: flex;
-  align-items: center;
   justify-content: center;
   height: 254px;
   background: linear-gradient(to bottom right, var(--gradient-1) 0%, var(--gradient-1) 33%, var(--gradient-2) 66%, var(--gradient-2) 100%);
@@ -26,13 +25,13 @@
   opacity: 45%;
   border-radius: 14px 14px 0 0;
   display: flex;
-  align-items: center;
   justify-content: center;
   height: 254px;
   background: linear-gradient(to bottom right, var(--gradient-1) 0%, var(--gradient-1) 33%, var(--gradient-2) 66%, var(--gradient-2) 100%);
 }
 
 .product-card__gradient__circle{
+  margin-top: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
