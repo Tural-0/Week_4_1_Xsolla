@@ -1,10 +1,44 @@
 import { createContext, useReducer } from "react";
+import { getItemQuantity, getItems } from "../api/itemsApi";
+import { useEffect } from "react";
 import { PRODUCTS } from "../data/products";
 
 export const CartCtx = createContext(null);
 
+async function addQuantity(products){
+    return await Promise.all(
+        products.map(async product => ({
+            ...product,
+            quantity: await getItemQuantity(product.id)
+        }))
+    );
+}
+
 export function CartProvider({ children }) {
 
+    const [products, dispatch] = useReducer(itemsReducer, []);
+
+    async function loadProducts() {
+        try {
+            const data = await getItems();
+            
+            const arr = JSON.parse(JSON.stringify(data))
+            const prdcs = await addQuantity(arr);
+
+            dispatch({
+                type: "SET_PRODUCTS",
+                products: prdcs
+            });
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        loadProducts();
+    }, []);
+  
     function itemsReducer(products, action) {
         switch (action.type) {
           case 'ADD':
@@ -31,10 +65,11 @@ export function CartProvider({ children }) {
                 ? { ...product, quantity: product.quantity - 1 }
                 : product
             )
+          case "SET_PRODUCTS":
+            return action.products;
         }
     }
 
-    const [products, dispatch] = useReducer(itemsReducer, PRODUCTS);
 
     return (
         <CartCtx.Provider value={{ products, dispatch }}>

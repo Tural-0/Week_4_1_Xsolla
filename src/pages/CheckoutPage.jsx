@@ -16,12 +16,17 @@ export default function CheckoutPage() {
 
   const navigate = useNavigate()
   
-  const [cart, setPrdcs] = useState([])
+  const {products, dispatch} = useContext(CartCtx)
+  const [cart, setCart] = useState([])
 
   const totalPrice = (cart.reduce(
-    (total, product) => ((total + product.price * product.count)),
+    (total, product) => ((total + product.price * product.quantity)),
     0
-  ))/100;
+  )/100).toFixed(2);
+
+  useEffect(() => {
+    setCart(products.filter(product => product.quantity > 0))
+  },[]);
 
 
   const handleSubmit = (event) => {

@@ -5,16 +5,26 @@ export default function LineProduct({ product, onIncrease, onDecrease, isInCart 
 
   const price = (product.price/100).toFixed(2)
   let soldText = "";
-  let buttonText = "Add to cart"
 
-  if (product.stock == 0){
-    soldText = "--sold";
-    buttonText = "Sold out"
+  function addToCart(){
+    if (product.stock > 0){
+      onIncrease()
+    }else{
+      alert("No stock remaining")
+    }
+  }
+
+  function decreaseFromCart(){
+    if (product.quantity >= 1){
+      onDecrease()
+    }else{
+      alert("This item is not in the cart")
+    }
   }
 
   function removeFromCart(){
     for (let i = 0; i < product.quantity; i++){
-      onDecrease(product.id)
+      onDecrease()
     }
   }
 
@@ -31,16 +41,16 @@ export default function LineProduct({ product, onIncrease, onDecrease, isInCart 
         </div>
         <div className="lineproduct-card__count-card-whole">
             <div className="lineproduct-card__count-card">
-                <button className="lineproduct-card__count-card__minusButton">
+                <button className="lineproduct-card__count-card__minusButton" onClick={decreaseFromCart}>
                     <p className="lineproduct-card__count-card__minusText">−</p>
                 </button>
-                <p className="lineproduct-card__count-card__text">{product.count}</p>
-                <button className="lineproduct-card__count-card__minusButton">
+                <p className="lineproduct-card__count-card__text">{product.quantity}</p>
+                <button className="lineproduct-card__count-card__minusButton" onClick={addToCart}>
                     <p className="lineproduct-card__count-card__minusText">+</p>
                 </button>
             </div>
             <p className="lineproduct-card__count-card__priceText">${price}</p>
-            <button className="lineproduct-card__count-card__deleteButton">
+            <button className="lineproduct-card__count-card__deleteButton" onClick={removeFromCart}>
                 <p className="lineproduct-card__count-card__deleteButton__text">×</p>
             </button>
         </div>

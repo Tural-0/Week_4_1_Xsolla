@@ -8,11 +8,6 @@ export default function ProductList() {
 
   const {products, dispatch} = useContext(CartCtx)
 
-  const totalPrice = products.reduce(
-    (total, product) => (total + product.price * product.quantity)/100,
-    0
-  );
-
   return (
     <>
     <div className="product-list">

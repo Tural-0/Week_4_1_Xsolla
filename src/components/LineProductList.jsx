@@ -1,17 +1,16 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import LineProduct from "./LineProduct";
-import { Link } from "react-router-dom";
+import { CartCtx } from "../context/CartContext";
 import '../styles/lineproductlist.css';
-import { CART } from "../data/cart"
 
 export default function LineProductList() {
 
-  const [cart, setCart] = useState(CART)
+  const {products, dispatch} = useContext(CartCtx)
+  const [cart, setCart] = useState([])
 
-  const totalPrice = cart.reduce(
-    (total, product) => (total + product.price * product.quantity)/100,
-    0
-  );
+  useEffect(() => {
+    setCart(products.filter(product => product.quantity > 0))
+  },[cart]);
 
   return (
     <>
