@@ -6,25 +6,68 @@ export const CartCtx = createContext(null);
 
 export function CartProvider({ children }) {
 
-    const [cart, dispatch] = useReducer(cartReducer, []);
+    const initialState = {
+        status: "idle",
+        products: [],
+        error: null
+    };
 
-    async function updateItemQuantity(itemId, quantity){
+    const [state, dispatch] = useReducer(cartReducer, initialState);
+
+    async function loadCart(){
+        dispatch({ type: "FETCH_START" });
+
+        try {
+            const data = await getUserCart();
+
+            dispatch({
+                type: "FETCH_SUCCESS",
+                cart: data.items
+            });
+
+        } catch (error) {
+            console.error(error);
+
+            dispatch({
+                type: "FETCH_ERROR",
+                error: error.message
+            });
+        }
+    }
+
+    async function increaseItemQuantity(itemId){
+        const item = state.cart.find(p => p.id === itemId);
+
+        if (!item) {
+            return;
+        }
+
         try{
-            await changeItemQuantity(itemId, quantity);
+            await changeItemQuantity(itemId, item.quantity+1);
+
+            dispatch({
+                type: "INCREASE",
+                id: itemId
+            });
         } catch (error) {
             console.error(error);
         }
     }
 
-    async function loadCart(){
-        try {
-            const data = await getUserCart();
+    async function decreaseItemQuantity(itemId){
+        const item = state.cart.find(p => p.id === itemId);
+
+        if (!item) {
+            return;
+        }
+
+        try{
+            await changeItemQuantity(itemId, item.quantity-1);
 
             dispatch({
-                type: "SET_CART",
-                cart: data.items
+                type: "DECREASE",
+                id: itemId
             });
-
         } catch (error) {
             console.error(error);
         }
@@ -33,6 +76,11 @@ export function CartProvider({ children }) {
     async function delItemFromCart(itemId){
         try{
             await deleteItemFromCart(itemId);
+
+            dispatch({
+                type: "DELETE",
+                id: itemId
+            })
         } catch (error) {
             console.error(error);
         }
@@ -42,60 +90,75 @@ export function CartProvider({ children }) {
         loadCart();
     }, []);
   
-    function cartReducer(cart, action) {
+    function cartReducer(state, action) {
         switch (action.type) {
-            case 'ADD':
-                const id = (products[products.length - 1].id ?? 0) + 1;
-
-                const product = {
-                  id,
-                  name: action.name,
-                  price: parseInt(action.price),
-                  quantity: 0,
-                  imageUrl: action.img
+            case "FETCH_START":
+                return {
+                    ...state,
+                    status: "loading",
+                    error: null
                 };
-
-                return [...products, product];
+            case "FETCH_SUCCESS":
+                return {
+                    status: "success",
+                    cart: action.cart,
+                    error: null
+                };
+            case "FETCH_ERROR":
+                return {
+                    ...state,
+                    status: "error",
+                    error: action.error
+                };
             case 'INCREASE':
-                const itemInc = cart.find(p => p.id === action.id);
-                updateItemQuantity(itemInc.id, itemInc.quantity + 1);
-                //loadCart();
-                return cart.map(product =>
-                    product.id === action.id
-                        ? {
-                            ...product,
-                            quantity: product.quantity + 1
-                        }
-                        : product
-                );
+                return {
+                    ...state,
+                    cart: state.cart.map(product =>
+                        product.id === action.id
+                            ? {
+                                ...product,
+                                quantity: product.quantity + 1
+                            }
+                            : product
+                        )
+                };
             case 'DECREASE':
-                const itemDec = cart.find(p => p.id === action.id);
-                updateItemQuantity(itemDec.id, itemDec.quantity - 1);
-                //loadCart();
-                return cart.map(product =>
-                    product.id === action.id
-                        ? {
-                            ...product,
-                            quantity: product.quantity - 1
-                        }
-                        : product
-                );
+                return {
+                    ...state,
+                    cart: state.cart.map(product =>
+                        product.id === action.id
+                            ? {
+                                ...product,
+                                quantity: product.quantity - 1
+                            }
+                            : product
+                    )
+                };
             case 'DELETE':
-                const itemDel = cart.find(p => p.id === action.id);
-                delItemFromCart(itemDel.id);
-                loadCart();
-                return cart;
-            case "SET_CART":
-                return action.cart;
-            case "LOAD":
-                loadCart();
-                return cart;
+                return {
+                    ...state,
+                    cart: state.cart.filter(
+                        product => product.id !== action.id
+                    )
+                };
+            default:
+                return state;
         }
     }
 
 
     return (
-        <CartCtx.Provider value={{ cart, dispatch }}>
+        <CartCtx.Provider
+            value={{
+                cart: state.cart,
+                status: state.status,
+                error: state.error,
+                increaseItemQuantity,
+                decreaseItemQuantity,
+                delItemFromCart,
+                loadCart,
+                dispatch
+            }}>
             {children}
         </CartCtx.Provider>
     );

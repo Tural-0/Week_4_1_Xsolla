@@ -9,16 +9,6 @@ import logo from "../assets/Mark.png"
 
 export default function Navbar(){
 
-    const [cartCount, setCartCount] = useState(0)
-
-    const {products, dispatch} = useContext(PrdctCtx)
-    
-    useEffect(() => {
-        setCartCount(prev => products.filter(
-            p => p.quantity >= 1
-        ).length)
-    }, [products]);
-
     return(
     <div className="navbar">
         <div className="navbar-item--logo">

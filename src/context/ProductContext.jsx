@@ -16,9 +16,17 @@ async function addQuantity(products){
 
 export function ProductProvider({ children }) {
 
-    const [products, dispatch] = useReducer(itemsReducer, []);
+    const initialState = {
+        status: "idle",
+        products: [],
+        error: null
+    };
+
+    const [state, dispatch] = useReducer(itemsReducer, initialState);
 
     async function loadProducts() {
+        dispatch({ type: "FETCH_START" });
+
         try {
             const data = await getItems();
 
@@ -26,18 +34,53 @@ export function ProductProvider({ children }) {
             const prdcs = await addQuantity(arr);
 
             dispatch({
-                type: "SET_PRODUCTS",
+                type: "FETCH_SUCCESS",
                 products: prdcs
             });
 
         } catch (error) {
             console.error(error);
+
+            dispatch({
+                type: "FETCH_ERROR",
+                error: error.message
+            });
         }
     }
 
-    async function updateItemQuantity(itemId, quantity){
+    async function increaseItemQuantity(itemId){
+        const item = state.products.find(p => p.id === itemId);
+
+        if (!item) {
+            return;
+        }
+
         try{
-            await changeItemQuantity(itemId, quantity);
+            await changeItemQuantity(itemId, item.quantity+1);
+
+            dispatch({
+                type: "INCREASE",
+                id: itemId
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    async function decreaseItemQuantity(itemId){
+        const item = state.products.find(p => p.id === itemId);
+
+        if (!item) {
+            return;
+        }
+
+        try{
+            await changeItemQuantity(itemId, item.quantity-1);
+
+            dispatch({
+                type: "DECREASE",
+                id: itemId
+            });
         } catch (error) {
             console.error(error);
         }
@@ -47,55 +90,67 @@ export function ProductProvider({ children }) {
         loadProducts();
     }, []);
   
-    function itemsReducer(products, action) {
+    function itemsReducer(state, action) {
         switch (action.type) {
-            case 'ADD':
-                const id = (products[products.length - 1].id ?? 0) + 1;
-            
-                const product = {
-                  id,
-                  name: action.name,
-                  price: parseInt(action.price),
-                  quantity: 0,
-                  imageUrl: action.img
+            case "FETCH_START":
+                return {
+                    ...state,
+                    status: "loading",
+                    error: null
                 };
-            
-                return [...products, product];
+            case "FETCH_SUCCESS":
+                return {
+                    status: "success",
+                    products: action.products,
+                    error: null
+                };
+            case "FETCH_ERROR":
+                return {
+                    ...state,
+                    status: "error",
+                    error: action.error
+                };
             case 'INCREASE':
-                const itemInc = products.find(p => p.id === action.id);
-                updateItemQuantity(itemInc.id, itemInc.quantity + 1);
-                //loadProducts();
-                return products.map(product =>
-                    product.id === action.id
-                        ? {
-                            ...product,
-                            quantity: product.quantity + 1
-                        }
-                        : product
-                );
+                return {
+                    ...state,
+                    products: state.products.map(product =>
+                        product.id === action.id
+                            ? {
+                                ...product,
+                                quantity: product.quantity + 1
+                            }
+                            : product
+                        )
+                };
             case 'DECREASE':
-                const itemDec = products.find(p => p.id === action.id);
-                updateItemQuantity(itemDec.id, itemDec.quantity - 1);
-                //loadProducts();
-                return products.map(product =>
-                    product.id === action.id
-                        ? {
-                            ...product,
-                            quantity: product.quantity - 1
-                        }
-                        : product
-                );
-            case "SET_PRODUCTS":
-                return action.products;
-            case "LOAD":
-                loadProducts();
-                return products;
+                return {
+                    ...state,
+                    products: state.products.map(product =>
+                        product.id === action.id
+                            ? {
+                                ...product,
+                                quantity: product.quantity - 1
+                            }
+                            : product
+                    )
+                };
+            default:
+                return state;
         }
     }
 
 
     return (
-        <PrdctCtx.Provider value={{ products, dispatch }}>
+        <PrdctCtx.Provider
+            value={{
+                products: state.products,
+                status: state.status,
+                error: state.error,
+                increaseItemQuantity,
+                decreaseItemQuantity,
+                loadProducts,
+                dispatch
+            }}>
             {children}
         </PrdctCtx.Provider>
     );

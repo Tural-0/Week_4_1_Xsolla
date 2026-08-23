@@ -5,10 +5,17 @@ import '../styles/lineproductlist.css';
 
 export default function LineProductList() {
 
-  const {cart, dispatch} = useContext(CartCtx)
+  const {
+    cart,
+    loadCart,
+    increaseItemQuantity,
+    decreaseItemQuantity,
+    delItemFromCart,
+    dispatch
+  } = useContext(CartCtx)
 
   useEffect(() => {
-    dispatch({type:"LOAD"})
+    loadCart()
   },[])
 
   return (
@@ -20,9 +27,9 @@ export default function LineProductList() {
                 <LineProduct
                     key={product.id}
                     product={product}
-                    onIncrease={() => dispatch({type:"INCREASE", id: product.id})}
-                    onDecrease={() => dispatch({type:"DECREASE", id: product.id})}
-                    onDelete={() => dispatch({type:"DELETE", id: product.id})}
+                    onIncrease={() => increaseItemQuantity(product.id)}
+                    onDecrease={() => decreaseItemQuantity(product.id)}
+                    onDelete={() => delItemFromCart(product.id)}
                 />
             ))}
         </div>

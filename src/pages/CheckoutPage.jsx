@@ -1,31 +1,27 @@
 import '../styles/checkout.css'
 import { useState, useEffect, useReducer, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
-import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import LineProductList from "../components/LineProductList";
 import { CartCtx } from "../context/CartContext";
 import { useLocalStorage } from "../custom_hooks/useLocalStorage";
-import { CART } from "../data/cart"
 
 export default function CheckoutPage() {
-  const [name, setName] = useLocalStorage("userName","")
-  const [email, setEmail] = useLocalStorage("email","")
-  const [address, setAddress] = useLocalStorage("address","")
   const [order, setOrder] = useLocalStorage("order",null)
 
   const navigate = useNavigate()
   
-  const {cart, dispatch} = useContext(CartCtx)
+  const {cart, loadCart} = useContext(CartCtx)
 
   useEffect(() => {
-    dispatch({type:"LOAD"})
+    loadCart()
   },[])
 
-  const totalPrice = (cart.reduce(
+  const totalPrice = ((cart || []).reduce(
     (total, product) => ((total + product.price * product.quantity)),
     0
   )/100).toFixed(2);
+  
 
   const handleSubmit = (event) => {
     event.preventDefault(); // Prevents page reload
@@ -55,8 +51,8 @@ export default function CheckoutPage() {
   return (
     <>
     <Navbar/>
-    <div className={cart.length > 0 ? "checkout-page" : "checkout-page--empty"}>
-      {cart.length > 0 ?
+    <div className={((cart || [])).length > 0 ? "checkout-page" : "checkout-page--empty"}>
+      {((cart || [])).length > 0 ?
         <>
           <LineProductList/>
           <div className='checkout-page__orderSum'>

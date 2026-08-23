@@ -3,28 +3,40 @@ import Product from "./Product";
 import { Link } from "react-router-dom";
 import '../styles/productlist.css';
 import { PrdctCtx } from "../context/ProductContext";
+import ProductListLoading from "./ProductListLoading";
 
 export default function ProductList() {
 
-  const {products, dispatch} = useContext(PrdctCtx)
+  const {
+    products,
+    status,
+    error,
+    loadProducts,
+    increaseItemQuantity,
+    decreaseItemQuantity
+  } = useContext(PrdctCtx);
 
   useEffect(() => {
-    dispatch({type:"LOAD"})
+    loadProducts()
   },[])
   
 
   return (
     <>
     <div className="product-list">
-      {products.length > 0 &&
-        products.map((product) => (
+      {status === "success"
+      ?
+        products.length > 0 && products.map((product) => (
           <Product
             key={product.id}
             product={product}
-            onIncrease={() => dispatch({type:"INCREASE", id: product.id})}
-            onDecrease={() => dispatch({type:"DECREASE", id: product.id})}
+            onIncrease={() => increaseItemQuantity(product.id)}
+            onDecrease={() => decreaseItemQuantity(product.id)}
           />
-        ))}
+        ))
+        :
+        <ProductListLoading/>
+      }
     </div>
     </>
   );

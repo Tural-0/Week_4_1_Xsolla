@@ -9,6 +9,6 @@ export default function ProductsPage() {
 
   return <>
     <Navbar/>
-    <ProductListLoading/>
+    <ProductList/>
   </>
 }
