@@ -46,9 +46,27 @@ export async function deleteItemFromCart(itemId){
         headers: myHeaders,
     });
 
-    if (response.ok){
-        return response;
+    if (!response.ok){
+        throw new Error("Failed to delete items from the cart (/api/user/cart/items/id)");
     }
 
-    return response.json();
+    return response;
+}
+
+export async function deleteUserCart(){
+    const myHeaders = new Headers();
+    const id = localStorage.getItem("userId");
+
+    myHeaders.append('X-User-ID', id);
+
+    const response = await fetch("/api/user/cart",{
+        method: "DELETE",
+        headers: myHeaders,
+    });
+
+    if (!response.ok){
+        throw new Error("Failed to delete cart (/api/user/cart)");
+    }
+
+    return response;
 }

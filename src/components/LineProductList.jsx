@@ -10,8 +10,7 @@ export default function LineProductList() {
     loadCart,
     increaseItemQuantity,
     decreaseItemQuantity,
-    delItemFromCart,
-    dispatch
+    delItemFromCart
   } = useContext(CartCtx)
 
   useEffect(() => {

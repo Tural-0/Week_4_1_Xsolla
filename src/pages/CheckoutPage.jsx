@@ -11,7 +11,7 @@ export default function CheckoutPage() {
 
   const navigate = useNavigate()
   
-  const {cart, loadCart} = useContext(CartCtx)
+  const {cart, loadCart, delUserCart} = useContext(CartCtx)
   const {
     order,
     placeOrder,
@@ -53,8 +53,9 @@ export default function CheckoutPage() {
   };
 
   useEffect(() => {
-    if (status === "success"){
+    if (status === "success" && cart.length != 0){
       console.log('Order response Data:', order);
+      delUserCart();
     }
   }, [status]);
 

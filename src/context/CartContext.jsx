@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 import { useEffect } from "react";
-import { changeItemQuantity, getUserCart, deleteItemFromCart } from "../api/cartApi";
+import { changeItemQuantity, getUserCart, deleteItemFromCart, deleteUserCart } from "../api/cartApi";
 
 export const CartCtx = createContext(null);
 
@@ -86,6 +86,18 @@ export function CartProvider({ children }) {
         }
     }
 
+    async function delUserCart(){
+        try{
+            await deleteUserCart();
+
+            dispatch({
+                type: "DELETE_CART"
+            })
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     useEffect(() => {
         loadCart();
     }, []);
@@ -141,6 +153,11 @@ export function CartProvider({ children }) {
                         product => product.id !== action.id
                     )
                 };
+            case 'DELETE_CART':
+                return {
+                    ...state,
+                    cart: []
+                };
             default:
                 return state;
         }
@@ -156,6 +173,7 @@ export function CartProvider({ children }) {
                 increaseItemQuantity,
                 decreaseItemQuantity,
                 delItemFromCart,
+                delUserCart,
                 loadCart,
                 dispatch
             }}>
