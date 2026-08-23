@@ -3,7 +3,7 @@
   justify-content: center;
   grid-template-columns: repeat(3, minmax(270px, 368px));
 
-  background-color: var(--line);
+  background-color: var(--background-2);
 
   padding: 48px;
   gap: 24px;
