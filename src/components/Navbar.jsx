@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { CartCtx } from "../context/CartContext";
+import { PrdctCtx } from "../context/ProductContext";
 import "../styles/navbar.css"
 import Popup from "./Popup";
 import CheckoutPage from "../pages/CheckoutPage";
@@ -11,7 +11,7 @@ export default function Navbar(){
 
     const [cartCount, setCartCount] = useState(0)
 
-    const {products, dispatch} = useContext(CartCtx)
+    const {products, dispatch} = useContext(PrdctCtx)
     
     useEffect(() => {
         setCartCount(prev => products.filter(

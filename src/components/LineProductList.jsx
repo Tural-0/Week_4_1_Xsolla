@@ -5,12 +5,7 @@ import '../styles/lineproductlist.css';
 
 export default function LineProductList() {
 
-  const {products, dispatch} = useContext(CartCtx)
-  const [cart, setCart] = useState([])
-
-  useEffect(() => {
-    setCart(products.filter(product => product.quantity > 0))
-  },[cart]);
+  const {cart, dispatch} = useContext(CartCtx)
 
   return (
     <>

@@ -2,7 +2,7 @@ import '../styles/checkout.css'
 import { useState, useReducer, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from '../components/Navbar';
-import { CartCtx } from "../context/CartContext";
+import { PrdctCtx } from "../context/ProductContext";
 
 export default function AddProductPage() {
   const [name, setName] = useState("")
@@ -10,7 +10,7 @@ export default function AddProductPage() {
   const [img, setImg] = useState("")
   const navigate = useNavigate()
 
-  const {products, dispatch} = useContext(CartCtx)
+  const {products, dispatch} = useContext(PrdctCtx)
 
   const handleSubmit = (event) => {
     event.preventDefault(); // Prevents page reload

@@ -8,10 +8,11 @@ import AddProductPage from "./pages/AddProductPage";
 import LoginPage from "./pages/LogInPage";
 import Footer from "./components/Footer";
 
-import { CartProvider } from "./context/CartContext";
+import { ProductProvider } from "./context/ProductContext";
 import { useTheme } from "./custom_hooks/useTheme";
 
 import "./App.css"
+import { CartProvider } from "./context/CartContext";
 
 function App() {
   const { theme, toggleTheme } = useTheme();
@@ -21,7 +22,9 @@ function App() {
     <div className="body">
     <div className="main">
 
+    <ProductProvider>
     <CartProvider>
+
 
     <BrowserRouter>
       <Routes>
@@ -39,7 +42,10 @@ function App() {
         } />
       </Routes>
     </BrowserRouter>
+
     </CartProvider>
+    </ProductProvider>
+    
     </div>
     <Footer className="footer"
         theme={theme}

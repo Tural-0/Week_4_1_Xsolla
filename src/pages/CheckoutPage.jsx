@@ -16,18 +16,12 @@ export default function CheckoutPage() {
 
   const navigate = useNavigate()
   
-  const {products, dispatch} = useContext(CartCtx)
-  const [cart, setCart] = useState([])
+  const {cart, dispatch} = useContext(CartCtx)
 
   const totalPrice = (cart.reduce(
     (total, product) => ((total + product.price * product.quantity)),
     0
   )/100).toFixed(2);
-
-  useEffect(() => {
-    setCart(products.filter(product => product.quantity > 0))
-  },[]);
-
 
   const handleSubmit = (event) => {
     event.preventDefault(); // Prevents page reload
@@ -81,7 +75,7 @@ export default function CheckoutPage() {
             <hr className='checkout-page__orderSum__line'/>
             <div className='checkout-page__orderSum__total'>
               <p className='checkout-page__orderSum__total__text'>Total</p>
-              <p className='checkout-page__orderSum__total__price'>${totalPrice+0}</p>
+              <p className='checkout-page__orderSum__total__price'>${totalPrice}</p>
             </div>
             <button
               className='checkout-page__orderSum__orderButton'

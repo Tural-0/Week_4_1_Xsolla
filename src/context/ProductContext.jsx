@@ -1,12 +1,39 @@
 import { createContext, useReducer } from "react";
+import { getItemQuantity, getItems } from "../api/itemsApi";
 import { useEffect } from "react";
 import { getUserCart } from "../api/cartApi";
 
-export const CartCtx = createContext(null);
+export const PrdctCtx = createContext(null);
 
-export function CartProvider({ children }) {
+async function addQuantity(products){
+    return await Promise.all(
+        products.map(async product => ({
+            ...product,
+            quantity: await getItemQuantity(product.id)
+        }))
+    );
+}
 
-    const [cart, dispatch] = useReducer(cartReducer, []);
+export function ProductProvider({ children }) {
+
+    const [products, dispatch] = useReducer(itemsReducer, []);
+
+    async function loadProducts() {
+        try {
+            const data = await getItems();
+
+            const arr = JSON.parse(JSON.stringify(data))
+            const prdcs = await addQuantity(arr);
+
+            dispatch({
+                type: "SET_PRODUCTS",
+                products: prdcs
+            });
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     async function loadCart(){
         try {
@@ -14,7 +41,7 @@ export function CartProvider({ children }) {
 
             dispatch({
                 type: "SET_CART",
-                cart: data.items
+                cart: data
             });
 
         } catch (error) {
@@ -23,10 +50,10 @@ export function CartProvider({ children }) {
     }
 
     useEffect(() => {
-        loadCart();
+        loadProducts();
     }, []);
   
-    function cartReducer(products, action) {
+    function itemsReducer(products, action) {
         switch (action.type) {
           case 'ADD':
             const id = (products[products.length - 1].id ?? 0) + 1;
@@ -52,15 +79,15 @@ export function CartProvider({ children }) {
                 ? { ...product, quantity: product.quantity - 1 }
                 : product
             )
-            case "SET_CART":
-                return action.cart;
+            case "SET_PRODUCTS":
+                return action.products;
         }
     }
 
 
     return (
-        <CartCtx.Provider value={{ cart, dispatch }}>
+        <PrdctCtx.Provider value={{ products, dispatch }}>
             {children}
-        </CartCtx.Provider>
+        </PrdctCtx.Provider>
     );
 }

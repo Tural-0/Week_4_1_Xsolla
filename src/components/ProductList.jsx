@@ -2,11 +2,11 @@ import { useState, useReducer, useContext } from "react";
 import Product from "./Product";
 import { Link } from "react-router-dom";
 import '../styles/productlist.css';
-import { CartCtx } from "../context/CartContext";
+import { PrdctCtx } from "../context/ProductContext";
 
 export default function ProductList() {
 
-  const {products, dispatch} = useContext(CartCtx)
+  const {products, dispatch} = useContext(PrdctCtx)
 
   return (
     <>
