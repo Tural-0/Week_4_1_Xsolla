@@ -1,6 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { PRODUCTS } from "./data/products";
-import { useState, useReducer, useEffect, createContext } from "react";
 
 import ProductsPage from "./pages/ProductsPage";
 import CheckoutPage from "./pages/CheckoutPage";
@@ -13,6 +11,7 @@ import { useTheme } from "./custom_hooks/useTheme";
 
 import "./App.css"
 import { CartProvider } from "./context/CartContext";
+import { OrderProvider } from "./context/OrderContext";
 
 function App() {
   const { theme, toggleTheme } = useTheme();
@@ -24,6 +23,8 @@ function App() {
 
     <ProductProvider>
     <CartProvider>
+    <OrderProvider>
+
 
 
     <BrowserRouter>
@@ -43,6 +44,7 @@ function App() {
       </Routes>
     </BrowserRouter>
 
+    </OrderProvider>
     </CartProvider>
     </ProductProvider>
     

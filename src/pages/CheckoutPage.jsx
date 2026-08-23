@@ -3,15 +3,21 @@ import { useState, useEffect, useReducer, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import Navbar from "../components/Navbar";
 import LineProductList from "../components/LineProductList";
-import { CartCtx } from "../context/CartContext";
 import { useLocalStorage } from "../custom_hooks/useLocalStorage";
+import { CartCtx } from "../context/CartContext";
+import { OrderCtx } from '../context/OrderContext';
 
 export default function CheckoutPage() {
-  const [order, setOrder] = useLocalStorage("order",null)
 
   const navigate = useNavigate()
   
   const {cart, loadCart} = useContext(CartCtx)
+  const {
+    order,
+    placeOrder,
+    status,
+    error
+  } = useContext(OrderCtx)
 
   useEffect(() => {
     loadCart()
@@ -27,26 +33,30 @@ export default function CheckoutPage() {
     event.preventDefault(); // Prevents page reload
 
     const items = cart
-      .filter(product => product.quantity > 0)
       .map(product => ({
-        itemId: product.id,
-        name: product.name,
+        item_id: product.id,
+        quantity: product.quantity,
         price: product.price,
-        quantity: product.quantity
       }));
+    
+    const total = cart.reduce(
+      (total, product) => ((total + product.price * product.quantity))
+      ,0)
+    
 
     if (items.length === 0){
       alert("Cart is empty")
       return
     }
 
-    const orderDetails = {
-      name, email, address, items, totalPrice
-    }
-
-    setOrder(prev => orderDetails)
-    console.log('Form Submitted Data:', orderDetails);
+    placeOrder(items, total);
   };
+
+  useEffect(() => {
+    if (status === "success"){
+      console.log('Order response Data:', order);
+    }
+  }, [status]);
 
   return (
     <>
@@ -80,8 +90,9 @@ export default function CheckoutPage() {
             <button
               className='checkout-page__orderSum__orderButton'
               onClick={handleSubmit}
+              disabled={status === "loading"}
               >
-                <p className='checkout-page__orderSum__orderButton__text'>Place order</p>
+                <p className='checkout-page__orderSum__orderButton__text'>{ status === "loading" ? "Loading..." : "Place order"}</p>
               </button>
             <p className='checkout-page__orderSum__terms'>By placing this order you agree to the Terms of Service.</p>
           </div>
