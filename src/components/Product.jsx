@@ -1,7 +1,7 @@
 import "../styles/product.css";
 import { useState } from "react";
 
-export default function Product({ product, onIncrease, onDecrease, isInCart = true }) {
+export default function Product({ product, onIncrease, onDecrease}) {
 
   const price = (product.price/100).toFixed(2)
   let soldText = "";
@@ -13,7 +13,7 @@ export default function Product({ product, onIncrease, onDecrease, isInCart = tr
   }
 
   function addToCart(){
-    if (product.stock > 0){
+    if (product.stock > 0 && product.quantity <= product.stock){
       onIncrease()
     }else{
       alert("No stock remaining")
@@ -21,16 +21,13 @@ export default function Product({ product, onIncrease, onDecrease, isInCart = tr
   }
 
   function decreaseFromCart(){
-    if (product.quantity >= 1){
+    if (product.quantity > 1){
       onDecrease()
-    }else{
-      alert("This item is not in the cart")
+    }else if (product.quantity == 1){
+      onDelete();
     }
-  }
-
-  function removeFromCart(){
-    for (let i = 0; i < product.quantity; i++){
-      onDecrease()
+    else{
+      alert("This item is not in the cart")
     }
   }
 
@@ -49,17 +46,26 @@ export default function Product({ product, onIncrease, onDecrease, isInCart = tr
           <p className="product-card__price-add__text">${price}</p>
           {
             product.quantity == 0 ?
-            <button className={"product-card__price-add__addToCartButton"+soldText} onClick={addToCart}>
+            <button
+              className={"product-card__price-add__addToCartButton"+soldText}
+              onClick={addToCart}
+              disabled={soldText === "--sold"}>
               <p className={"product-card__price-add__addToCartButton__text"+soldText}>{buttonText}</p>
             </button>
             :
             <div className="lineproduct-card__count-card-whole">
               <div className="lineproduct-card__count-card">
-                  <button className="lineproduct-card__count-card__minusButton" onClick={decreaseFromCart}>
+                  <button
+                    className="lineproduct-card__count-card__minusButton"
+                    onClick={decreaseFromCart}
+                    disabled={product.quantity <= 1}>
                       <p className="lineproduct-card__count-card__minusText">−</p>
                   </button>
                   <p className="lineproduct-card__count-card__text">{product.quantity}</p>
-                  <button className="lineproduct-card__count-card__minusButton" onClick={addToCart}>
+                  <button
+                    className="lineproduct-card__count-card__minusButton"
+                    onClick={addToCart}
+                    disabled={product.quantity >= product.stock}>
                       <p className="lineproduct-card__count-card__minusText">+</p>
                   </button>
               </div>

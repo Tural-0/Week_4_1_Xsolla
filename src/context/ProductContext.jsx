@@ -65,12 +65,26 @@ export function ProductProvider({ children }) {
                 const itemInc = products.find(p => p.id === action.id);
                 updateItemQuantity(itemInc.id, itemInc.quantity + 1);
                 //loadProducts();
-                return products;
+                return products.map(product =>
+                    product.id === action.id
+                        ? {
+                            ...product,
+                            quantity: product.quantity + 1
+                        }
+                        : product
+                );
             case 'DECREASE':
                 const itemDec = products.find(p => p.id === action.id);
                 updateItemQuantity(itemDec.id, itemDec.quantity - 1);
                 //loadProducts();
-                return products;
+                return products.map(product =>
+                    product.id === action.id
+                        ? {
+                            ...product,
+                            quantity: product.quantity - 1
+                        }
+                        : product
+                );
             case "SET_PRODUCTS":
                 return action.products;
             case "LOAD":

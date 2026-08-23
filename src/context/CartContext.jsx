@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 import { useEffect } from "react";
-import { changeItemQuantity, getUserCart } from "../api/cartApi";
+import { changeItemQuantity, getUserCart, deleteItemFromCart } from "../api/cartApi";
 
 export const CartCtx = createContext(null);
 
@@ -30,6 +30,14 @@ export function CartProvider({ children }) {
         }
     }
 
+    async function delItemFromCart(itemId){
+        try{
+            await deleteItemFromCart(itemId);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     useEffect(() => {
         loadCart();
     }, []);
@@ -51,11 +59,30 @@ export function CartProvider({ children }) {
             case 'INCREASE':
                 const itemInc = cart.find(p => p.id === action.id);
                 updateItemQuantity(itemInc.id, itemInc.quantity + 1);
-                loadCart();
-                return cart;
+                //loadCart();
+                return cart.map(product =>
+                    product.id === action.id
+                        ? {
+                            ...product,
+                            quantity: product.quantity + 1
+                        }
+                        : product
+                );
             case 'DECREASE':
                 const itemDec = cart.find(p => p.id === action.id);
                 updateItemQuantity(itemDec.id, itemDec.quantity - 1);
+                //loadCart();
+                return cart.map(product =>
+                    product.id === action.id
+                        ? {
+                            ...product,
+                            quantity: product.quantity - 1
+                        }
+                        : product
+                );
+            case 'DELETE':
+                const itemDel = cart.find(p => p.id === action.id);
+                delItemFromCart(itemDel.id);
                 loadCart();
                 return cart;
             case "SET_CART":

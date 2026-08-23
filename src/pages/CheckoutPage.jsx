@@ -18,6 +18,10 @@ export default function CheckoutPage() {
   
   const {cart, dispatch} = useContext(CartCtx)
 
+  useEffect(() => {
+    dispatch({type:"LOAD"})
+  },[])
+
   const totalPrice = (cart.reduce(
     (total, product) => ((total + product.price * product.quantity)),
     0

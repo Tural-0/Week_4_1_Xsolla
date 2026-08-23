@@ -4,7 +4,6 @@ import { useState } from "react";
 export default function LineProduct({ product, onIncrease, onDecrease, onDelete }) {
 
   const price = (product.price/100).toFixed(2)
-  let soldText = "";
 
   function addToCart(){
     if (product.stock > 0 && product.quantity <= product.stock){
@@ -33,7 +32,7 @@ export default function LineProduct({ product, onIncrease, onDecrease, onDelete 
     <>
     <div className="lineproduct-cardParent">
     <div className="lineproduct-card">
-        <div className={"lineproduct-card__gradient"+soldText}>
+        <div className={"lineproduct-card__gradient"}>
             <p className="lineproduct-card__gradient__circle__text">{product.name[0]}</p>
         </div>
         <div className="lineproduct-card__infoTexts">

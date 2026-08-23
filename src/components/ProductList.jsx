@@ -23,7 +23,6 @@ export default function ProductList() {
             product={product}
             onIncrease={() => dispatch({type:"INCREASE", id: product.id})}
             onDecrease={() => dispatch({type:"DECREASE", id: product.id})}
-            isInCart={false}
           />
         ))}
     </div>

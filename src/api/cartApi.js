@@ -34,3 +34,21 @@ export async function changeItemQuantity(itemId, quantity) {
 
     return response.json();
 }
+
+export async function deleteItemFromCart(itemId){
+    const myHeaders = new Headers();
+    const id = localStorage.getItem("userId");
+
+    myHeaders.append('X-User-ID', id);
+
+    const response = await fetch("/api/user/cart/items/" + itemId ,{
+        method: "DELETE",
+        headers: myHeaders,
+    });
+
+    if (response.ok){
+        return response;
+    }
+
+    return response.json();
+}
