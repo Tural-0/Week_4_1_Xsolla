@@ -1,12 +1,20 @@
 import { createContext, useReducer } from "react";
 import { useEffect } from "react";
-import { getUserCart } from "../api/cartApi";
+import { changeItemQuantity, getUserCart } from "../api/cartApi";
 
 export const CartCtx = createContext(null);
 
 export function CartProvider({ children }) {
 
     const [cart, dispatch] = useReducer(cartReducer, []);
+
+    async function updateItemQuantity(itemId, quantity){
+        try{
+            await changeItemQuantity(itemId, quantity);
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     async function loadCart(){
         try {
@@ -26,34 +34,35 @@ export function CartProvider({ children }) {
         loadCart();
     }, []);
   
-    function cartReducer(products, action) {
+    function cartReducer(cart, action) {
         switch (action.type) {
-          case 'ADD':
-            const id = (products[products.length - 1].id ?? 0) + 1;
+            case 'ADD':
+                const id = (products[products.length - 1].id ?? 0) + 1;
 
-            const product = {
-              id,
-              name: action.name,
-              price: parseInt(action.price),
-              quantity: 0,
-              imageUrl: action.img
-            };
+                const product = {
+                  id,
+                  name: action.name,
+                  price: parseInt(action.price),
+                  quantity: 0,
+                  imageUrl: action.img
+                };
 
-            return [...products, product];
-          case 'INCREASE':
-            return products.map(product =>
-              product.id === action.id
-                ? { ...product, quantity: product.quantity + 1 }
-                : product
-            )
-          case 'DECREASE':
-            return products.map(product =>
-              product.id === action.id
-                ? { ...product, quantity: product.quantity - 1 }
-                : product
-            )
+                return [...products, product];
+            case 'INCREASE':
+                const itemInc = cart.find(p => p.id === action.id);
+                updateItemQuantity(itemInc.id, itemInc.quantity + 1);
+                loadCart();
+                return cart;
+            case 'DECREASE':
+                const itemDec = cart.find(p => p.id === action.id);
+                updateItemQuantity(itemDec.id, itemDec.quantity - 1);
+                loadCart();
+                return cart;
             case "SET_CART":
                 return action.cart;
+            case "LOAD":
+                loadCart();
+                return cart;
         }
     }
 

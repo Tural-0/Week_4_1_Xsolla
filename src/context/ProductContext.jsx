@@ -1,7 +1,7 @@
-import { createContext, useReducer } from "react";
+import { act, createContext, useReducer } from "react";
 import { getItemQuantity, getItems } from "../api/itemsApi";
 import { useEffect } from "react";
-import { getUserCart } from "../api/cartApi";
+import { changeItemQuantity } from "../api/cartApi";
 
 export const PrdctCtx = createContext(null);
 
@@ -35,15 +35,9 @@ export function ProductProvider({ children }) {
         }
     }
 
-    async function loadCart(){
-        try {
-            const data = await getUserCart();
-
-            dispatch({
-                type: "SET_CART",
-                cart: data
-            });
-
+    async function updateItemQuantity(itemId, quantity){
+        try{
+            await changeItemQuantity(itemId, quantity);
         } catch (error) {
             console.error(error);
         }
@@ -55,32 +49,33 @@ export function ProductProvider({ children }) {
   
     function itemsReducer(products, action) {
         switch (action.type) {
-          case 'ADD':
-            const id = (products[products.length - 1].id ?? 0) + 1;
-
-            const product = {
-              id,
-              name: action.name,
-              price: parseInt(action.price),
-              quantity: 0,
-              imageUrl: action.img
-            };
-
-            return [...products, product];
-          case 'INCREASE':
-            return products.map(product =>
-              product.id === action.id
-                ? { ...product, quantity: product.quantity + 1 }
-                : product
-            )
-          case 'DECREASE':
-            return products.map(product =>
-              product.id === action.id
-                ? { ...product, quantity: product.quantity - 1 }
-                : product
-            )
+            case 'ADD':
+                const id = (products[products.length - 1].id ?? 0) + 1;
+            
+                const product = {
+                  id,
+                  name: action.name,
+                  price: parseInt(action.price),
+                  quantity: 0,
+                  imageUrl: action.img
+                };
+            
+                return [...products, product];
+            case 'INCREASE':
+                const itemInc = products.find(p => p.id === action.id);
+                updateItemQuantity(itemInc.id, itemInc.quantity + 1);
+                //loadProducts();
+                return products;
+            case 'DECREASE':
+                const itemDec = products.find(p => p.id === action.id);
+                updateItemQuantity(itemDec.id, itemDec.quantity - 1);
+                //loadProducts();
+                return products;
             case "SET_PRODUCTS":
                 return action.products;
+            case "LOAD":
+                loadProducts();
+                return products;
         }
     }
 

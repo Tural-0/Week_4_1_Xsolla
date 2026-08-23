@@ -7,6 +7,10 @@ export default function LineProductList() {
 
   const {cart, dispatch} = useContext(CartCtx)
 
+  useEffect(() => {
+    dispatch({type:"LOAD"})
+  },[])
+
   return (
     <>
     <div className="line-product-list">
@@ -18,7 +22,7 @@ export default function LineProductList() {
                     product={product}
                     onIncrease={() => dispatch({type:"INCREASE", id: product.id})}
                     onDecrease={() => dispatch({type:"DECREASE", id: product.id})}
-                    isInCart={true}
+                    onDelete={() => dispatch({type:"DELETE", id: product.id})}
                 />
             ))}
         </div>

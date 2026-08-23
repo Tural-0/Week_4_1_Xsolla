@@ -87,6 +87,11 @@
     cursor: pointer;
 }
 
+.lineproduct-card__count-card__minusButton:disabled{
+    cursor: not-allowed;
+    visibility: hidden;
+}
+
 .lineproduct-card__count-card__minusText{
     font-size: 15px;
     font-weight: 600;

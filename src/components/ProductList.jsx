@@ -1,4 +1,4 @@
-import { useState, useReducer, useContext } from "react";
+import { useState, useReducer, useContext, useEffect } from "react";
 import Product from "./Product";
 import { Link } from "react-router-dom";
 import '../styles/productlist.css';
@@ -7,6 +7,11 @@ import { PrdctCtx } from "../context/ProductContext";
 export default function ProductList() {
 
   const {products, dispatch} = useContext(PrdctCtx)
+
+  useEffect(() => {
+    dispatch({type:"LOAD"})
+  },[])
+  
 
   return (
     <>
