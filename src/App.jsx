@@ -4,6 +4,7 @@ import ProductsPage from "./pages/ProductsPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import AddProductPage from "./pages/AddProductPage";
 import LoginPage from "./pages/LogInPage";
+import OrdersPage from "./pages/OrdersPage";
 import Footer from "./components/Footer";
 
 import { ProductProvider } from "./context/ProductContext";
@@ -40,6 +41,9 @@ function App() {
         } />
         <Route path="/login" element={
           <LoginPage/>
+        } />
+        <Route path="/orders" element={
+          <OrdersPage/>
         } />
       </Routes>
     </BrowserRouter>

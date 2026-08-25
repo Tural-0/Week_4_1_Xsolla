@@ -19,6 +19,9 @@ export default function Navbar(){
             <Link to="/" className="noDecoText">
                 <p className="navbar-item__storetext">Store</p>
             </Link>
+            <Link to="/orders" className="noDecoText">
+                <p className="navbar-item__storetext">Orders</p>
+            </Link>
             <Link to="/checkout" className="noDecoText">
                 <div className="navbar-item__cartButton">
                     <img src={cartImage} className="navbar-item__cartImg"/>

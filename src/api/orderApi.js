@@ -24,3 +24,22 @@ export async function placeUserOrder(items, total) {
 
     return response.json();
 }
+
+export async function getUserOrders(){
+    const myHeaders = new Headers();
+
+    const id = localStorage.getItem("userId");
+
+    myHeaders.append('X-User-ID', id);
+
+    const response = await fetch("/api/user/orders" ,{
+        method: "GET",
+        headers: myHeaders,
+    });
+
+    if (!response.ok){
+        throw new Error("Failed to post order (/api/user/orders)");
+    }
+
+    return response.json();
+}

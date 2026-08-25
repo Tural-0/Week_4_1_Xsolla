@@ -1,7 +1,26 @@
 import { createContext, useReducer } from "react";
-import { placeUserOrder } from "../api/orderApi";
+import { placeUserOrder, getUserOrders } from "../api/orderApi";
+import { getItemById } from "../api/itemsApi";
 
 export const OrderCtx = createContext(null);
+
+async function addName(orders){
+    return await Promise.all(
+        orders.map(async order => ({
+            ...order,
+            line_items: await Promise.all(
+                order.line_items.map(async line_item => {
+                    const item = await getItemById(line_item.item_id);
+
+                    return {
+                        ...line_item,
+                        name: item.name
+                    };
+                })
+            )
+        }))
+    );
+}
 
 export function OrderProvider({ children }) {
 
@@ -23,6 +42,33 @@ export function OrderProvider({ children }) {
             dispatch({
                 type: "FETCH_SUCCESS",
                 order: orderData
+            });
+        } catch (error) {
+            console.error(error);
+
+            dispatch({
+                type: "FETCH_ERROR",
+                error: error.message
+            });
+        }
+    }
+
+    async function getOrders() {
+        dispatch({ type: "FETCH_START" });
+
+        try{
+            const data = await getUserOrders();
+
+            const arr = JSON.parse(JSON.stringify(data))
+            const orders = await addName(arr);
+            const final = orders.sort((a,b) => {
+                if (a.id > b.id) return -1
+                else return 1
+            })
+
+            dispatch({
+                type: "FETCH_SUCCESS",
+                order: final
             });
         } catch (error) {
             console.error(error);
@@ -67,6 +113,7 @@ export function OrderProvider({ children }) {
                 status: state.status,
                 error: state.error,
                 placeOrder,
+                getOrders,
                 dispatch
             }}>
             {children}

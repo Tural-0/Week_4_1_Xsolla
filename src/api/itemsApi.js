@@ -1,5 +1,3 @@
-import { useLocalStorage } from "../custom_hooks/useLocalStorage";
-
 export async function getItems() {
     const response = await fetch("/api/items");
 
