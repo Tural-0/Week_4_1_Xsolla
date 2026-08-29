@@ -32,11 +32,11 @@ export function OrderProvider({ children }) {
 
     const [state, dispatch] = useReducer(orderReducer, initialState);
 
-    async function placeOrder(items,total) {
+    async function placeOrder(items,total,discount) {
         dispatch({ type: "FETCH_START" });
 
         try{
-            const data = await placeUserOrder(items, total);
+            const data = await placeUserOrder(items, total, discount);
             const orderData = data.order;
 
             dispatch({
@@ -60,7 +60,7 @@ export function OrderProvider({ children }) {
             const data = await getUserOrders();
 
             const arr = JSON.parse(JSON.stringify(data))
-            const orders = await addName(arr);
+            const orders = await addName(arr.data);
             const final = orders.sort((a,b) => {
                 if (a.id > b.id) return -1
                 else return 1

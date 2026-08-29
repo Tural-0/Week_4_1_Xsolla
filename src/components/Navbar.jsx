@@ -1,9 +1,5 @@
 import { Link } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import { PrdctCtx } from "../context/ProductContext";
 import "../styles/navbar.css"
-import Popup from "./Popup";
-import CheckoutPage from "../pages/CheckoutPage";
 import cartImage from "../assets/CartIcon.png"
 import logo from "../assets/Mark.png"
 

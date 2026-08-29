@@ -26,10 +26,16 @@ export async function getItemQuantity(itemId){
 
     myHeaders.append('X-User-ID', id);
 
-    const response = await fetch("/api/itemQuantity/" + itemId, {
-        headers: myHeaders,  
-    });
+    try{
 
-    return response.json();
+        const response = await fetch("/api/itemQuantity/" + itemId, {
+            headers: myHeaders,  
+        });
 
+        if (!response.ok) return 0;
+
+        return response.json();
+    } catch (error){
+        return 0;
+    }
 }

@@ -1,4 +1,4 @@
-export async function placeUserOrder(items, total) {
+export async function placeUserOrder(items, total, discount) {
     const myHeaders = new Headers();
 
     const id = localStorage.getItem("userId");
@@ -10,6 +10,7 @@ export async function placeUserOrder(items, total) {
     const orderBody = {
         "line_items":items,
         "total":total,
+        "discount":discount,
     }
 
     const response = await fetch("/api/orders" ,{

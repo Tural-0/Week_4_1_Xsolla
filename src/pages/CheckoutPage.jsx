@@ -11,6 +11,8 @@ export default function CheckoutPage() {
 
   const navigate = useNavigate()
   
+  const [promo, setPromo] = useState("");
+
   const {cart, loadCart, delUserCart} = useContext(CartCtx)
   const {
     order,
@@ -49,7 +51,7 @@ export default function CheckoutPage() {
       return
     }
 
-    placeOrder(items, total);
+    placeOrder(items, total, promo);
   };
 
   useEffect(() => {
@@ -81,7 +83,9 @@ export default function CheckoutPage() {
               <input
                 className='checkout-page__orderSum__promo_input'
                 placeholder='XSOLLA10'
-                type='text'/>
+                type='text'
+                value={promo}
+                onChange={(e) => setPromo(e.target.value)}/>
             </div>
             <hr className='checkout-page__orderSum__line'/>
             <div className='checkout-page__orderSum__total'>

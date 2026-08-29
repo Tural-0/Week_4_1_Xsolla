@@ -7,10 +7,11 @@ export const PrdctCtx = createContext(null);
 
 async function addQuantity(products){
     return await Promise.all(
-        products.map(async product => ({
+        products.map(async product => { 
+            return {
             ...product,
             quantity: await getItemQuantity(product.id)
-        }))
+        }})
     );
 }
 
@@ -31,7 +32,7 @@ export function ProductProvider({ children }) {
             const data = await getItems();
 
             const arr = JSON.parse(JSON.stringify(data))
-            const prdcs = await addQuantity(arr);
+            const prdcs = await addQuantity(arr.data);
 
             dispatch({
                 type: "FETCH_SUCCESS",
