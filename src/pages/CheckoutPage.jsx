@@ -57,7 +57,6 @@ export default function CheckoutPage() {
   useEffect(() => {
     if (status === "success" && cart.length != 0){
       console.log('Order response Data:', order);
-      delUserCart();
     }
   }, [status]);
 

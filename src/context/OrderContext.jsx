@@ -1,6 +1,7 @@
 import { createContext, useReducer } from "react";
 import { placeUserOrder, getUserOrders } from "../api/orderApi";
 import { getItemById } from "../api/itemsApi";
+import { deleteUserCart } from "../api/cartApi"
 
 export const OrderCtx = createContext(null);
 
@@ -43,6 +44,7 @@ export function OrderProvider({ children }) {
                 type: "FETCH_SUCCESS",
                 order: orderData
             });
+            deleteUserCart();
         } catch (error) {
             console.error(error);
 
