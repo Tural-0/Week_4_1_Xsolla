@@ -18,7 +18,14 @@ export default defineConfig({
     },
   },
 
-  projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
+  projects: [
+    {
+      name: 'chromium',
+      use: {
+        ...devices['Desktop Chrome'],
+      },
+    },
+  ],
 
   webServer: {
     command: 'python -m http.server 5173 --directory public',
