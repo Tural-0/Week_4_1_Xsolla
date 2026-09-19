@@ -23,7 +23,7 @@ export default function ProductList() {
 
   return (
     <>
-    <div className="product-list">
+    <div className="product-list" data-testid="product-list">
       {status === "success"
       ?
         products.length > 0 && products.map((product) => (

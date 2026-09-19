@@ -182,7 +182,7 @@ test.describe("Visual regression tests", () => {
 
     await page.goto("/");
 
-    await expect(page.locator(".product-list")).toBeVisible();
+    await expect(page.locator('[data-testid="product-list"]')).toBeVisible();
     await expect(page.locator(".product-card")).toHaveCount(6);
 
     await expect(page.locator(".product-list")).toHaveScreenshot(
